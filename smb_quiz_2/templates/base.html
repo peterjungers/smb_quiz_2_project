@@ -1,0 +1,36 @@
+{#
+8-Bit Super Mario Bros. Quiz
+Author: Peter Jungers
+Date: March 2024
+#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Quiz for Super Mario Bros. games appearing on the Nintendo Entertainment System.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="data:;base64,iVBORwOKGO="/>  {# For Chrome favicon console error #}
+    <!-- For iPhone message thumbnail -->
+    <meta property="og:title" content="8-Bit Super Mario Bros. Quiz">
+    <meta property="og:type" content="image.png">
+{#    <meta property="og:url" content="https://peterjungers.pythonanywhere.com/smb_quiz">#}
+    <meta property="og:image" content="{{ url_for('static', filename='images/bowser.png') }}">
+
+    <title>8-Bit Super Mario Bros. Quiz</title>
+</head>
+<body>
+    <div id="container">
+        <h1><a href="{% url 'smb-quiz-index' %}">8-Bit Super Mario Bros. Quiz</a></h1>
+        {% block content %}{% endblock content %}
+        <footer>
+            <p>Written and designed by <a href="#" target="_blank">Peter Jungers</a>, 2024</p>
+            <p>Original pixel art made using in-game sprites as reference</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
