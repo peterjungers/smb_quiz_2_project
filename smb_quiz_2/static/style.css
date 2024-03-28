@@ -1,0 +1,225 @@
+/*
+CSS for Super Mario Bros. quiz
+Author: Peter Jungers
+Date: January/February 2023
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Press+Start+2P&display=swap');
+
+
+/* || CSS RESET */
+html, body, div, footer, h1, p, span, a, img, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+
+/* || Default styles are for narrow screens */
+/* || GENERAL STYLES */
+:root {
+    --dark: #292929;
+    --light: #f1f1f1;
+    --focus-outline: #e00000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--light);
+    /* So font-size doesn't increase when mobile switches to landscape: */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: 100%;
+}
+
+h1 {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    line-height: 1.75rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--light);
+}
+
+button {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+a:focus,
+button:focus {
+    outline-color: var(--focus-outline);
+    tab-index: 0;
+}
+
+
+/* || UTILITIES */
+#container {
+    display: grid;
+    row-gap: 2rem;
+    margin: 1.5rem;
+}
+
+.btn-rectangle {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1.1rem 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid var(--light);
+    border-radius: 20px;
+}
+
+.btn-circle {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1.1rem;
+    padding-left: 1.2rem; /* Necessary because font itself is slightly off-center */
+    border: 1px solid var(--light);
+    border-radius: 50%;
+}
+
+.sprite,
+#error-sprite {
+    justify-self: center;
+    width: 75px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+/* || QUESTION STYLES */
+.answer-options {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 1.25rem;
+    padding: 0 2rem;
+}
+
+.answer-options p {
+    height: 1.75rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.option p {
+    height: fit-content;
+}
+
+
+/* || SCORE STYLES */
+#score-container {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+}
+
+#score-sprite {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+#calculating-score {
+    display: none;
+    width: 210px;
+    margin-top: 9.5%;
+    margin-left: calc(50% - 100px);
+}
+
+#score-results {
+    display: none;
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+}
+
+#score-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light);
+    width: 6rem;
+    height: 6rem;
+    border: 1px solid var(--light);
+    border-radius: 50%;
+}
+
+#score-circle p {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+
+/* || FOOTER */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer p {
+    font-size: .5rem;
+    line-height: 1rem;
+}
+
+footer a {
+    text-decoration: underline;
+    text-decoration-thickness: .03em;
+    text-underline-offset: 2px;
+}
+
+
+/* || MEDIA QUERIES */
+/* Pointer fine */
+@media screen and (pointer: fine) {
+    a.btn-rectangle:hover,
+    button.btn-circle:hover {
+        background-color: var(--light);
+        color: var(--dark);
+        cursor: pointer;
+    }
+}
+
+/* Min-width 500px viewport */
+@media screen and (min-width: 500px) {
+    #container {
+        max-width: 500px;
+        margin: 15% auto;
+    }
+
+    .btn-rectangle {
+        justify-self: center;
+        width: 350px;
+    }
+}
+
+/* Min-width 1024px viewport */
+@media screen and (min-width: 1024px) {
+    #container {
+        margin: 150px auto;
+    }
+}

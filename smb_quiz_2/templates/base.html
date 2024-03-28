@@ -23,7 +23,7 @@ Date: March 2024
 </head>
 <body>
     <div id="container">
-        <h1><a href="{% url 'smb-quiz-index' %}">8-Bit Super Mario Bros. Quiz</a></h1>
+        <h1><a href="{{ url_for('main.index') }}">8-Bit Super Mario Bros. Quiz</a></h1>
         {% block content %}{% endblock content %}
         <footer>
             <p>Written and designed by <a href="#" target="_blank">Peter Jungers</a>, 2024</p>
