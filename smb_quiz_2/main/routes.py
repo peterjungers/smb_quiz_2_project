@@ -60,6 +60,7 @@ def quiz():
     # Silly little encryption so correct answers
     # aren't readily visible in dev tools :)
     def random_characters():
+        # Help from https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits
         random_string = "".join(random.choices(
             string.ascii_uppercase
             + string.ascii_lowercase
@@ -75,7 +76,15 @@ def quiz():
         for letter in answer:
             letter = chr(ord(letter) + 5)
             coded_answer += letter
-        need_this = len(coded_answer)
+        key = str(len(coded_answer))
+        # This is so I know all keys are two digits:
+        if int(key) < 10:
+            key = "0" + key
+        coded_answer = coded_answer + key
+
+        print(key)
+        print(coded_answer)
+
         while len(coded_answer) < 200:
             x = "".join(random.choices(
                     string.ascii_uppercase
@@ -84,14 +93,11 @@ def quiz():
                     + string.punctuation,
                     k=1))
             coded_answer = x + coded_answer
-        coded_answer = coded_answer + random_characters()
         print(coded_answer)
-        print(len(coded_answer))
-
-
-        add_characters = random_characters() + answer + random_characters()
-        # print(add_characters)
-        coded_answers.append(add_characters)
+        coded_answer = coded_answer + random_characters()
+        # print(coded_answer)
+        coded_answers.append(coded_answer)
+        # print(len(coded_answer))
 
     return render_template("quiz.html",
                            quiz=quiz,

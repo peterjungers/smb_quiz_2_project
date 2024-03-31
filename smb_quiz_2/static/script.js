@@ -77,10 +77,21 @@ function decodeAnswers() {
 
     codedAnswers.forEach(answer => {
         let decodedAnswer = "";
-        for (let i = 0; i < answer.length; i++) {
-            let letter = String.fromCharCode(answer[i].charCodeAt(0) - 5);
+        let key = "";
+        let codedAnswer = "";
+
+        key = parseInt(answer.substring(0, 200).slice(-2));
+        codedAnswer = answer.substring(0, 198).slice(-key);
+
+        console.log(key);
+        console.log(codedAnswer);
+
+        // console.log(answer);
+        for (let i = 0; i < codedAnswer.length; i++) {
+            let letter = String.fromCharCode(codedAnswer[i].charCodeAt(0) - 5);
             decodedAnswer += letter;
         }
+        console.log(decodedAnswer);
         correctAnswers.push(decodedAnswer);
     });
     checkBtnAnswer(correctAnswers);
