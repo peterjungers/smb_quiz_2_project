@@ -1,4 +1,6 @@
 import random
+import string
+
 from flask import Blueprint, render_template
 from sqlalchemy import select
 
@@ -14,7 +16,7 @@ def index():
     return render_template("index.html")
 
 
-@main.route("/quiz")
+@main.route("/quiz")  # create one route for each level instead
 def quiz():
     # Establish list of unique numeric values:
     values = []
@@ -23,64 +25,74 @@ def quiz():
         if v not in values:
             values.append(v)
 
-    print(values)
-
     # Query database using those unique values as primary key value:
-    # question_objects = []
-    question_objects = db.session.execute(
-                select(Question)
-                .filter(Question.id.in_(values)))
-    # question_objects.append(question)
-
-    # Query database using those unique values as primary key value:
-    question_objects = []
+    questions = []
     for v in values:
-        question = db.session.execute(
-                select(Question)
-                .filter(Question.id == v))
-        # print(question)
-        question_objects.append(question)
-    # print(question_objects)
-    # for q_o in question_objects:
-    #     for row in q_o:
-    #         print(row.Question.id)
+        # Query returns object consisting of a
+        # question, correct answer, two wrong answers:
+        q = db.session.execute(
+            select(Question)
+            .filter(Question.id == v)
+            )
+        questions.append(q)
 
-    # for q_o in question_objects:
-    #     print(q_o.Question)
-        # for row in q_o:
-        #     print(row.Question.id)
-
-    # Separate each Question object so answers can be shuffled:
+    # Separate elements of each Question object so answers can be shuffled:
     num = 1
-    quiz_questions = []
+    quiz = []
     correct_answers = []
-    for q_o in question_objects:
-        for row in q_o:
+    for q in questions:  # For each question object in list:
+        for row in q:  # For each question:
             correct = row.Question.answer
             correct_answers.append(correct)
             answer_options = [
-                row.Question.answer, row.Question.wrong_answer_1, row.Question.wrong_answer_2
+                row.Question.answer,
+                row.Question.wrong_answer_1,
+                row.Question.wrong_answer_2
             ]
             random.shuffle(answer_options)
             # Question number, question, question's three answer options:
-            num_question_options = num, row.Question.question, answer_options
-            quiz_questions.append(num_question_options)
-            num +=1
-
-    for q in quiz_questions:
-        print(q[0])
-    # print(correct_answers)
+            num_question_options = (num,
+                                    row.Question.question,
+                                    answer_options)
+            quiz.append(num_question_options)
+            num += 1
 
     # Silly little encryption so correct answers
     # aren't readily visible in dev tools :)
+    def random_characters():
+        random_string = "".join(random.choices(
+            string.ascii_uppercase
+            + string.ascii_lowercase
+            + string.digits
+            + string.punctuation,
+            k=200)
+        )
+        return random_string
+
     coded_answers = []
     for answer in correct_answers:
         coded_answer = ""
         for letter in answer:
             letter = chr(ord(letter) + 5)
             coded_answer += letter
-        coded_answers.append(coded_answer)
+        need_this = len(coded_answer)
+        while len(coded_answer) < 200:
+            x = "".join(random.choices(
+                    string.ascii_uppercase
+                    + string.ascii_lowercase
+                    + string.digits
+                    + string.punctuation,
+                    k=1))
+            coded_answer = x + coded_answer
+        coded_answer = coded_answer + random_characters()
+        print(coded_answer)
+        print(len(coded_answer))
+
+
+        add_characters = random_characters() + answer + random_characters()
+        # print(add_characters)
+        coded_answers.append(add_characters)
 
     return render_template("quiz.html",
-                           quiz_questions=quiz_questions,
+                           quiz=quiz,
                            array=coded_answers)

@@ -4,7 +4,7 @@
 {% block content %}
     <img id="header-sprite" class="sprite" src="" alt="Pixel art">
 
-    {% for q in quiz_questions %}
+    {% for q in quiz %}
         {# q[0] = Question number; q[1] = Question; q[2][0], q[2][1], q[2][2] = Shuffled answers #}
         <p>
             <span>{{ q[0] }}. </span> {# Question number #}
@@ -44,6 +44,7 @@
 {% block js %}
     <script id="array">
         const array = {{ array|tojson }}
+        {#const x = {{ x|tojson }}#}
     </script>
 {% endblock js %}
 
