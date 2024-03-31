@@ -72,8 +72,7 @@ function showOrHideImages(images) {
 
 
 function decodeAnswers() {
-    const codedAnswers =
-        JSON.parse(document.querySelector("#array").textContent);
+    const codedAnswers = array;
     let correctAnswers = [];
 
     codedAnswers.forEach(answer => {
@@ -191,6 +190,6 @@ function showFinalScore(counterCorrectAnswers, counterAllQuestions) {
 window.addEventListener("DOMContentLoaded", randomizeImages);
 
 // Quiz page questions and scoring:
-if (document.querySelector("#array")) {
+if (document.getElementById("array")) {
     window.addEventListener("DOMContentLoaded", decodeAnswers);
 }

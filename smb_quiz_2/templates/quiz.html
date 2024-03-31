@@ -4,45 +4,46 @@
 {% block content %}
     <img id="header-sprite" class="sprite" src="" alt="Pixel art">
 
-{#    {% for q in quiz_questions %}#}
-{#        <p>#}
-{#            <span>{{ q.0 }}. </span> {# Question number #}
-{#            {{ q.1 }} {# Question #}
-{#        </p>#}
-{#        <div class="answer-options">#}
-{#            <div class="option">#}
-{#                <button class="btn-circle btn-{{ q.0 }}">A</button> {# href="#!" prevents scroll to top when using focus with keyboard press (id of ! doesn't exist) #}
-{#                <p>{{ q.2.0 }}</p> {# Shuffled answer #}
-{#            </div>#}
-{#            <div class="option">#}
-{#                <button class="btn-circle btn-{{ q.0 }}">B</button>#}
-{#                <p>{{ q.2.1 }}</p> {# Shuffled answer #}
-{#            </div>#}
-{#            <div class="option">#}
-{#                <button class="btn-circle btn-{{ q.0 }}">C</button>#}
-{#                <p>{{ q.2.2 }}</p> {# Shuffled answer #}
-{#            </div>#}
-{#            <p id="message-{{ q.0 }}"></p>#}
-{#        </div>#}
-{#        <img id="image-{{ q.0 }}" class="sprite" src="" alt="Pixel art">#}
-{#    {% endfor %}#}
+    {% for q in quiz_questions %}
+        {# q[0] = Question number; q[1] = Question; q[2][0], q[2][1], q[2][2] = Shuffled answers #}
+        <p>
+            <span>{{ q[0] }}. </span> {# Question number #}
+            {{ q[1] }} {# Question #}
+        </p>
+        <div class="answer-options">
+            <div class="option">
+                <button class="btn-circle btn-{{ q[0] }}">A</button>
+                <p>{{ q[2][0] }}</p> {# Shuffled answer #}
+            </div>
+            <div class="option">
+                <button class="btn-circle btn-{{ q[0] }}">B</button>
+                <p>{{ q[2][1] }}</p> {# Shuffled answer #}
+            </div>
+            <div class="option">
+                <button class="btn-circle btn-{{ q[0] }}">C</button>
+                <p>{{ q[2][2] }}</p> {# Shuffled answer #}
+            </div>
+            <p id="message-{{ q[0] }}"></p>
+        </div>
+        <img id="image-{{ q[0] }}" class="sprite" src="" alt="Pixel art">
+    {% endfor %}
 
-{#    <div id="score-container">#}
-{#        <img id= "score-sprite" src="{{ url_for('static', filename='images/bowser.png')}}" alt="Pixel art">#}
-{#        <p id="calculating-score">Calculating your score<span id="dots"></span></p>#}
-{#        <div id="score-results">#}
-{#            <div id="score-circle"><p></p></div>#}
-{#            <p id="score-message"></p>#}
-{#        </div>#}
-{#    </div>#}
+    <div id="score-container">
+        <img id= "score-sprite" src="{{ url_for('static', filename='images/bowser.png')}}" alt="Pixel art">
+        <p id="calculating-score">Calculating your score<span id="dots"></span></p>
+        <div id="score-results">
+            <div id="score-circle"><p></p></div>
+            <p id="score-message"></p>
+        </div>
+    </div>
 
     <a class="btn-rectangle" href="{{ url_for('main.quiz') }}">Reset quiz</a>
-
 {% endblock content %}
 
+
 {% block js %}
-<script>
-    const array = {{ array|tojson }}
-</script>
+    <script id="array">
+        const array = {{ array|tojson }}
+    </script>
 {% endblock js %}
 
