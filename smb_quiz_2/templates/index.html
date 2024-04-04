@@ -6,6 +6,6 @@
     <p>
         Welcome to the Super Mario Bros. quiz! The quiz consists of ten randomly chosen questions about Super Mario Bros., Super Mario Bros. 2, and Super Mario Bros. 3—all from the Nintendo Entertainment System. You will have one opportunity to answer each question. If you get the answer wrong, don't worry! The answer will remain hidden, though, so you can try to get it right another time. Your final score will be tallied after all questions have been answered. Ready?
     </p>
-    <a class="btn-rectangle" href="{{ url_for('main.quiz') }}">Press start</a>
+    <a class="btn-rectangle" href="{{ url_for('main.quiz', level_num='3') }}">Press start</a>
     <img class="sprite" src="" alt="Pixel art">
 {% endblock content %}
