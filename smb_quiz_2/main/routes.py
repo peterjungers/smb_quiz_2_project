@@ -16,7 +16,7 @@ def index():
     return render_template("index.html")
 
 
-# If route is manually typed, sent back to index (make it go to level 1?, but can't make work):
+# If route is manually typed, sent back to index (make it go to level 1? but can't make work). Now it just goes to 404:
 @main.route("/quiz")
 def testing():
     return render_template("index.html")
@@ -24,7 +24,13 @@ def testing():
 
 @main.route("/quiz/<level_num>")
 def quiz(level_num):
-    """ """
+    """ To do:
+    Read more about calling functions, variable placement above, etc.
+    Shadowing variable names within functions as shown by intellisense.
+    Functions within functions—seems hard to read.
+
+    Make comments.
+    """
     def get_questions(level_num):
         questions = db.session.execute(
                     select(Question)
@@ -62,7 +68,19 @@ def quiz(level_num):
 
     def encrypt_answers(correct_answers):
         """ """
-        def random_characters(amount):
+
+        def get_key(coded_answer):
+            key = str(len(coded_answer))
+            # This is so I know all keys are two digits:
+            if int(key) < 10:
+                two_digit_key = "0" + key
+            else:
+                two_digit_key = key
+            coded_answer = coded_answer + two_digit_key
+
+            return coded_answer
+
+        def get_random_characters(amount):
             # Help from https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits
             random_string = "".join(random.choices(
                             string.ascii_uppercase
@@ -81,21 +99,15 @@ def quiz(level_num):
                     letter = chr(ord(letter) + 5)
                     coded_answer += letter
 
-                key = str(len(coded_answer))
-                # This is so I know all keys are two digits:
-                if int(key) < 10:
-                    two_digit_key = "0" + key
-                else:
-                    two_digit_key = key
-                coded_answer = coded_answer + two_digit_key
+                get_key(coded_answer)
 
                 # Make all coded answers have length of 200 characters:
                 while len(coded_answer) < 200:
-                    random_char = random_characters(1)
+                    random_char = get_random_characters(1)
                     coded_answer = random_char + coded_answer
 
                 # Append 200 more random characters at end of coded answer:
-                coded_answer = coded_answer + random_characters(200)
+                coded_answer = coded_answer + get_random_characters(200)
                 coded_answers.append(coded_answer)
 
             return coded_answers
