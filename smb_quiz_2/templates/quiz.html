@@ -5,27 +5,30 @@
     <img id="header-sprite" class="sprite" src="" alt="Pixel art">
 
     {% for q in quiz %}
-        {# q[0] = Question number; q[1] = Question; q[2][0], q[2][1], q[2][2] = Shuffled answers #}
-        <p>
-            <span>{{ q[0] }}. </span> {# Question number #}
-            {{ q[1] }} {# Question #}
-        </p>
-        <div class="answer-options">
-            <div class="option">
-                <button class="btn-circle btn-{{ q[0] }}">A</button>
-                <p>{{ q[2][0] }}</p> {# Shuffled answer #}
+        <div class="testing">
+            {# q[0] = Question number; q[1] = Question; q[2][0], q[2][1], q[2][2] = Shuffled answers; q[3] = level #}
+            <p class="level-id">{{ q[3] }}</p>
+            <p>
+                <span>{{ q[0] }}. </span> {# Question number #}
+                {{ q[1] }} {# Question #}
+            </p>
+            <div class="answer-options">
+                <div class="option">
+                    <button class="btn-circle btn-{{ q[0] }}">A</button>
+                    <p>{{ q[2][0] }}</p> {# Shuffled answer #}
+                </div>
+                <div class="option">
+                    <button class="btn-circle btn-{{ q[0] }}">B</button>
+                    <p>{{ q[2][1] }}</p> {# Shuffled answer #}
+                </div>
+                <div class="option">
+                    <button class="btn-circle btn-{{ q[0] }}">C</button>
+                    <p>{{ q[2][2] }}</p> {# Shuffled answer #}
+                </div>
+                <p id="message-{{ q[0] }}"></p>
             </div>
-            <div class="option">
-                <button class="btn-circle btn-{{ q[0] }}">B</button>
-                <p>{{ q[2][1] }}</p> {# Shuffled answer #}
-            </div>
-            <div class="option">
-                <button class="btn-circle btn-{{ q[0] }}">C</button>
-                <p>{{ q[2][2] }}</p> {# Shuffled answer #}
-            </div>
-            <p id="message-{{ q[0] }}"></p>
+            <img id="image-{{ q[0] }}" class="sprite" src="" alt="Pixel art">
         </div>
-        <img id="image-{{ q[0] }}" class="sprite" src="" alt="Pixel art">
     {% endfor %}
 
     <div id="score-container">
@@ -37,7 +40,8 @@
         </div>
     </div>
 
-    <a class="btn-rectangle" href="{{ url_for('main.quiz', level_num='level_1') }}">Reset quiz</a>
+    <a id="next-level" class="btn-rectangle" href="#">Next Level</a>
+    <a class="btn-rectangle" href="{{ url_for('main.quiz') }}">Reset quiz</a>
 {% endblock content %}
 
 

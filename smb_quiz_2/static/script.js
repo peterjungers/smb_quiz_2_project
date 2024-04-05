@@ -68,11 +68,52 @@ function showOrHideImages(images) {
 }
 
 
-// The remaining ****four functions are for handling of quiz questions and score:
 
-function determineLevel() {
-    console.log("hi");
+// functions for showing correct level
+
+// function levelOne() {
+//     let levelID = "1";
+//     determineLevel(levelID);
+// }
+
+function determineLevel(levelID) {
+    const levelIDs = document.querySelectorAll(".level-id");
+    const testing = document.querySelectorAll(".testing");
+
+    for (let i = 0; i < levelIDs.length; i++) {
+        if (levelIDs[i].innerText === levelID) {
+            testing[i].style.display = "block";
+            console.log(levelIDs[i].innerText);
+        }
+        else {
+            testing[i].style.display = "none"
+        }
+    }
+    if (levelID === "1") {
+        nextLevel("2");
+    }
+    else if (levelID === "2") {
+        nextLevel("3");
+    }
+    else {
+        nextLevel("done");
+    }
 }
+
+
+function nextLevel(level) {
+    // console.log(level);
+    const nextLevelBtn = document.querySelector("#next-level");
+
+    nextLevelBtn.addEventListener("click", () => {
+        // console.log("hi");
+        determineLevel(level);
+    });
+}
+
+
+
+// The remaining ****four functions are for handling of quiz questions and score:
 
 
 function decodeAnswers() {
@@ -87,15 +128,10 @@ function decodeAnswers() {
         key = parseInt(answer.substring(0, 200).slice(-2));
         codedAnswer = answer.substring(0, 198).slice(-key);
 
-        console.log(key);
-        console.log(codedAnswer);
-
-        // console.log(answer);
         for (let i = 0; i < codedAnswer.length; i++) {
             let letter = String.fromCharCode(codedAnswer[i].charCodeAt(0) - 5);
             decodedAnswer += letter;
         }
-        console.log(decodedAnswer);
         correctAnswers.push(decodedAnswer);
     });
     checkBtnAnswer(correctAnswers);
@@ -106,6 +142,7 @@ function checkBtnAnswer(correctAnswers) {
     const optionBtns = document.querySelectorAll(".option button");
     let counterCorrectAnswers = 0;
     let counterAllQuestions = 0;
+    console.log(optionBtns);
 
     optionBtns.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -206,5 +243,8 @@ window.addEventListener("DOMContentLoaded", randomizeImages);
 
 // Quiz page questions and scoring:
 if (document.getElementById("array")) {
-    window.addEventListener("DOMContentLoaded", determineLevel, decodeAnswers);
+    window.addEventListener("DOMContentLoaded", () => {
+        determineLevel("1");
+    });
+    window.addEventListener("DOMContentLoaded", decodeAnswers);
 }

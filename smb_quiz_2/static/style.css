@@ -66,6 +66,10 @@ button:focus {
     tab-index: 0;
 }
 
+.level-id {
+    display: none;
+}
+
 
 /* || UTILITIES */
 #container {

@@ -40,18 +40,17 @@ def quiz():
 
         return quiz_questions
 
-    # refactor the object, q for parts
     def get_elements(quiz_questions):
         correct_answers = []
-        for object in quiz_questions:
-            for q in object:
+        for question_levels in quiz_questions:
+            for q in question_levels:
                 correct = q.Question.answer
                 correct_answers.append(correct)
 
         quiz = []
         num = 1
-        for object in quiz_questions:
-            for q in object:
+        for question_levels in quiz_questions:
+            for q in question_levels:
                 answer_options = [
                     q.Question.answer,
                     q.Question.wrong_answer_1,
@@ -59,10 +58,11 @@ def quiz():
                 ]
                 random.shuffle(answer_options)
 
-                num_question_options = (num,
-                                        q.Question.question,
-                                        answer_options)
-                quiz.append(num_question_options)
+                num_ques_opt_lev = (num,
+                                    q.Question.question,
+                                    answer_options,
+                                    q.Question.level)
+                quiz.append(num_ques_opt_lev)
 
                 num += 1
 
@@ -70,7 +70,6 @@ def quiz():
 
     def encrypt_answers(correct_answers):
         """ """
-
         def get_key(coded_answer):
             key = str(len(coded_answer))
             # This is so I know all keys are two digits:
