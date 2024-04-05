@@ -68,7 +68,11 @@ function showOrHideImages(images) {
 }
 
 
-// The remaining four functions are for handling of quiz questions and score:
+// The remaining ****four functions are for handling of quiz questions and score:
+
+function determineLevel() {
+    console.log("hi");
+}
 
 
 function decodeAnswers() {
@@ -202,5 +206,5 @@ window.addEventListener("DOMContentLoaded", randomizeImages);
 
 // Quiz page questions and scoring:
 if (document.getElementById("array")) {
-    window.addEventListener("DOMContentLoaded", decodeAnswers);
+    window.addEventListener("DOMContentLoaded", determineLevel, decodeAnswers);
 }

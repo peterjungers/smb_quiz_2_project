@@ -16,14 +16,8 @@ def index():
     return render_template("index.html")
 
 
-# If route is manually typed, sent back to index (make it go to level 1? but can't make work). Now it just goes to 404:
 @main.route("/quiz")
-def testing():
-    return render_template("index.html")
-
-
-@main.route("/quiz/<level_num>")
-def quiz(level_num):
+def quiz():
     """ To do:
     Read more about calling functions, variable placement above, etc.
     Shadowing variable names within functions as shown by intellisense.
@@ -31,38 +25,46 @@ def quiz(level_num):
 
     Make comments.
     """
-    def get_questions(level_num):
-        questions = db.session.execute(
-                    select(Question)
-                    .filter(Question.level == level_num)
-                    ).all()
-        random.shuffle(questions)
-        questions = questions[0:5]
+    def get_questions():
+        levels = [1, 2, 3]
+        quiz_questions = []
 
-        return questions
+        for level in levels:
+            questions = db.session.execute(
+                        select(Question)
+                        .filter(Question.level == level)
+                        ).all()
+            random.shuffle(questions)
+            questions = questions[0:5]
+            quiz_questions.append(questions)
 
+        return quiz_questions
+
+    # refactor the object, q for parts
     def get_elements(quiz_questions):
         correct_answers = []
-        for q in quiz_questions:
-            correct = q.Question.answer
-            correct_answers.append(correct)
+        for object in quiz_questions:
+            for q in object:
+                correct = q.Question.answer
+                correct_answers.append(correct)
 
         quiz = []
         num = 1
-        for q in quiz_questions:
-            answer_options = [
-                q.Question.answer,
-                q.Question.wrong_answer_1,
-                q.Question.wrong_answer_2
-            ]
-            random.shuffle(answer_options)
+        for object in quiz_questions:
+            for q in object:
+                answer_options = [
+                    q.Question.answer,
+                    q.Question.wrong_answer_1,
+                    q.Question.wrong_answer_2
+                ]
+                random.shuffle(answer_options)
 
-            num_question_options = (num,
-                                    q.Question.question,
-                                    answer_options)
-            quiz.append(num_question_options)
+                num_question_options = (num,
+                                        q.Question.question,
+                                        answer_options)
+                quiz.append(num_question_options)
 
-            num += 1
+                num += 1
 
         return correct_answers, quiz
 
@@ -99,7 +101,7 @@ def quiz(level_num):
                     letter = chr(ord(letter) + 5)
                     coded_answer += letter
 
-                get_key(coded_answer)
+                coded_answer = get_key(coded_answer)
 
                 # Make all coded answers have length of 200 characters:
                 while len(coded_answer) < 200:
@@ -115,7 +117,7 @@ def quiz(level_num):
         coded_answers = create_coded_answers(correct_answers)
         return coded_answers
 
-    quiz_questions = get_questions(level_num)
+    quiz_questions = get_questions()
     correct_answers, quiz = get_elements(quiz_questions)
     coded_answers = encrypt_answers(correct_answers)
 
@@ -123,5 +125,4 @@ def quiz(level_num):
 
     return render_template("quiz.html",
                            quiz=quiz,
-                           level_num=level_num,
                            array=coded_answers)
