@@ -2,10 +2,11 @@
 
 
 {% block content %}
+    <p id="score">000000</p>
     <img id="header-sprite" class="sprite" src="" alt="Pixel art">
 
     {% for q in quiz %}
-        <div class="testing">
+        <div class="question">
             {# q[0] = Question number; q[1] = Question; q[2][0], q[2][1], q[2][2] = Shuffled answers; q[3] = level #}
             <p class="level-id">{{ q[3] }}</p>
             <p>

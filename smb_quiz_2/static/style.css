@@ -98,6 +98,11 @@ button:focus {
     border-radius: 50%;
 }
 
+.btn-circle-fill {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
 .sprite,
 #error-sprite {
     justify-self: center;

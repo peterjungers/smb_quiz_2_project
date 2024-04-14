@@ -78,15 +78,14 @@ function showOrHideImages(images) {
 
 function determineLevel(levelID) {
     const levelIDs = document.querySelectorAll(".level-id");
-    const testing = document.querySelectorAll(".testing");
+    const question = document.querySelectorAll(".question");
 
     for (let i = 0; i < levelIDs.length; i++) {
         if (levelIDs[i].innerText === levelID) {
-            testing[i].style.display = "block";
-            console.log(levelIDs[i].innerText);
+            question[i].style.display = "block";
         }
         else {
-            testing[i].style.display = "none"
+            question[i].style.display = "none"
         }
     }
     if (levelID === "1") {
@@ -140,9 +139,9 @@ function decodeAnswers() {
 
 function checkBtnAnswer(correctAnswers) {
     const optionBtns = document.querySelectorAll(".option button");
+    const levelIDs = document.querySelectorAll(".level-id");
     let counterCorrectAnswers = 0;
     let counterAllQuestions = 0;
-    console.log(optionBtns);
 
     optionBtns.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -152,8 +151,7 @@ function checkBtnAnswer(correctAnswers) {
                     let allOptions = btn.parentElement.parentElement.children;
                     let message = document.querySelector(`#message-${i + 1}`);
 
-                    btn.style.backgroundColor = "#f1f1f1";
-                    btn.style.color = "#292929";
+                    btn.classList.add("btn-circle-fill");
                     if (btn.nextElementSibling.innerText
                             === correctAnswers[i]) {
                         for (let i = 0; i < allOptions.length; i++) {
@@ -165,6 +163,7 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Correct!";
                         counterCorrectAnswers += 1;
                         counterAllQuestions += 1;
+                        increaseScore(levelIDs[i]);
                     } else {
                         for (let i = 0; i < allOptions.length; i++) {
                             allOptions[i].style.opacity = .5;
@@ -184,6 +183,8 @@ function checkBtnAnswer(correctAnswers) {
                     }
                 }
             }
+            // here the counterAllQuestions variable needs to be the amount needed to
+            // advance at each level
             if (counterAllQuestions === correctAnswers.length) {
                 const score = document.querySelector("#score-container");
                 score.scrollIntoView({behavior: "smooth", block: "start"});
@@ -191,6 +192,31 @@ function checkBtnAnswer(correctAnswers) {
             }
         });
     });
+
+    // for (let i = 0; i < levelIDs.length; i++) {
+    //     console.log(levelIDs[i].innerText);
+    //     if (levelIDs[i].innerText === "1") {
+    //         if (counterCorrectAnswers >= 2) {
+    //
+    //         }
+    //     }
+    // }
+}
+
+
+function increaseScore(levelID) {
+    let scoreDiv = document.querySelector("#score");
+    let counterScoreDiv = parseInt(document.querySelector("#score").innerText);
+
+    if (levelID.innerText === "1") {
+        counterScoreDiv += 100;
+    } else if (levelID.innerText === "2") {
+        counterScoreDiv += 200;
+    } else if (levelID.innerText === "3") {
+        counterScoreDiv += 300;
+    }
+    counterScoreDiv = counterScoreDiv.toString().padStart(6, "0");
+    scoreDiv.innerText = counterScoreDiv;
 }
 
 
