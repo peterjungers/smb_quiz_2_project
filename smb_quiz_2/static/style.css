@@ -115,6 +115,14 @@ button:focus {
 
 
 /* || QUESTION STYLES */
+.question p {
+    margin-bottom: 2rem;
+}
+
+.question img {
+    margin: auto;
+}
+
 .answer-options {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
