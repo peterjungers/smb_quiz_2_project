@@ -135,6 +135,10 @@ button:focus {
 /*    margin: 0;*/
 /*}*/
 
+.hidden {
+    display: none;
+}
+
 
 /* || QUESTION STYLES */
 .question p {

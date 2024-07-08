@@ -79,7 +79,9 @@ function showOrHideImages(images) {
 function determineLevel(levelID) {
     const levelIDs = document.querySelectorAll(".level-id");
     const question = document.querySelectorAll(".question");
+    const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
 
+    // Shows or hides questions with levelID:
     for (let i = 0; i < levelIDs.length; i++) {
         if (levelIDs[i].innerText === levelID) {
             question[i].style.display = "block";
@@ -88,45 +90,59 @@ function determineLevel(levelID) {
             question[i].style.display = "none"
         }
     }
+    // Sets next levelID:
     if (levelID === "1") {
-        nextLevel("2");
+        setNextLevel("2");
     }
     else if (levelID === "2") {
-        nextLevel("3");
+        setNextLevel("3");
     }
     else {
-        nextLevel("done");
+        setNextLevel("done");
     }
 }
 
 
-function nextLevel(level) {
+function setNextLevel(level) {
     const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
-    let score = parseInt(document.querySelector("#score-counter-top").innerText);
 
+    // quizFinishedBtn.innerText = "Reset Quiz";
+    // quizFinishedBtn.href = "quiz";
+
+    /*
+    If quizFinishedBtn clicked before
+    */
     quizFinishedBtn.addEventListener("click", () => {
-
         determineLevel(level);
-        if (level === "2" && (score >= 400)) {
-            console.log("hi");
-        }
-        else {console.log("no");}
     });
 }
 
 
 function determineQuizOutcome(levelScore) {
+    const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
+    const quizTest = document.querySelector("#quiz-test")
     let level = levelScore[0];
     let score = levelScore[1];
     console.log(level)
     console.log(score)
 
     if (level === "1" && score >= 1000) {
-        console.log("wowowowow")
+        quizFinishedBtn.innerText = "Next Level";
+        quizFinishedBtn.href = "#";
+        quizFinishedBtn.addEventListener("click", () => {
+            quizFinishedBtn.style.display = "none";
+            quizTest.style.display = "block";
+        });
     }
-
+    else if (level === "2" && score >= 3000) {
+        quizFinishedBtn.innerText = "Next Level";
+        quizFinishedBtn.href = "#";
+    }
+    else if (level === "3" && score >= 23000) {
+        quizFinishedBtn.innerText = "High Scores";
+        quizFinishedBtn.href = "index";
+    }
 }
-
 
 
 // The remaining ****four functions are for handling of quiz questions and score:
@@ -189,6 +205,7 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Sorry, incorrect.";
                         counterAllQuestions += 1;
                     }
+                    console.log(counterAllQuestions);
                     /* Disable question options for click
                     or focus Enter keydown: */
                     for (let i = 0; i < allOptions.length; i++) {
@@ -215,6 +232,8 @@ function checkBtnAnswer(correctAnswers) {
             let levelScore = [level, totalScore];
             if (counterAllQuestions === visibleQuestions) {
                 determineQuizOutcome(levelScore);
+                // Reset counter for next levelID:
+                counterAllQuestions = 0;
             }
 
             // for (let i = 0; i < levelIDs.length; i++) {
