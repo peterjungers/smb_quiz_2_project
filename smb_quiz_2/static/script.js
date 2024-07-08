@@ -101,13 +101,30 @@ function determineLevel(levelID) {
 
 
 function nextLevel(level) {
-    // console.log(level);
-    const nextLevelBtn = document.querySelector("#next-level");
+    const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
+    let score = parseInt(document.querySelector("#score-counter-top").innerText);
 
-    nextLevelBtn.addEventListener("click", () => {
-        // console.log("hi");
+    quizFinishedBtn.addEventListener("click", () => {
+
         determineLevel(level);
+        if (level === "2" && (score >= 400)) {
+            console.log("hi");
+        }
+        else {console.log("no");}
     });
+}
+
+
+function determineQuizOutcome(levelScore) {
+    let level = levelScore[0];
+    let score = levelScore[1];
+    console.log(level)
+    console.log(score)
+
+    if (level === "1" && score >= 1000) {
+        console.log("wowowowow")
+    }
+
 }
 
 
@@ -142,6 +159,7 @@ function checkBtnAnswer(correctAnswers) {
     const levelIDs = document.querySelectorAll(".level-id");
     let counterCorrectAnswers = 0;
     let counterAllQuestions = 0;
+    let totalScore;
 
     optionBtns.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -163,7 +181,7 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Correct!";
                         counterCorrectAnswers += 1;
                         counterAllQuestions += 1;
-                        increaseScore(levelIDs[i]);
+                        totalScore = increaseScore(levelIDs[i]);
                     } else {
                         for (let i = 0; i < allOptions.length; i++) {
                             allOptions[i].style.opacity = .5;
@@ -183,40 +201,64 @@ function checkBtnAnswer(correctAnswers) {
                     }
                 }
             }
+
+            // Check to see if all visible questions have been answered:
+            let visibleQuestions = 0;
+            let level;
+            for (let i = 0; i < levelIDs.length; i++) {
+                // "display" property is set on "question" class div
+                if (levelIDs[i].parentElement.style.display === "block") {
+                    visibleQuestions += 1;
+                    level = levelIDs[i].innerText;  // Same for all visible levelIDs
+                }
+            }
+            let levelScore = [level, totalScore];
+            if (counterAllQuestions === visibleQuestions) {
+                determineQuizOutcome(levelScore);
+            }
+
+            // for (let i = 0; i < levelIDs.length; i++) {
+            //     console.log(levelIDs[i].innerText);
+            //     // if (levelIDs[i].innerText === "1") {
+            //     //     if (counterCorrectAnswers >= 2) {
+            //     //
+            //     //     }
+            //     // }
+            // }
+
+
             // here the counterAllQuestions variable needs to be the amount needed to
             // advance at each level
-            if (counterAllQuestions === correctAnswers.length) {
-                const score = document.querySelector("#score-container");
-                score.scrollIntoView({behavior: "smooth", block: "start"});
-                showCalculating(counterCorrectAnswers, counterAllQuestions);
-            }
+            // if (counterAllQuestions === correctAnswers.length) {
+            //     determineQuizOutcome(totalScore);
+                // const score = document.querySelector("#score-container");
+                // score.scrollIntoView({behavior: "smooth", block: "start"});
+                // showCalculating(counterCorrectAnswers, counterAllQuestions);
+            // }
         });
     });
-
-    // for (let i = 0; i < levelIDs.length; i++) {
-    //     console.log(levelIDs[i].innerText);
-    //     if (levelIDs[i].innerText === "1") {
-    //         if (counterCorrectAnswers >= 2) {
-    //
-    //         }
-    //     }
-    // }
 }
 
 
 function increaseScore(levelID) {
-    let scoreDiv = document.querySelector("#score");
-    let counterScoreDiv = parseInt(document.querySelector("#score").innerText);
+    const scoreCounterTop = document.querySelector("#score-counter-top");
+    const scoreCounterBottom = document.querySelector("#score-counter-bottom");
+    let score = parseInt(document.querySelector("#score-counter-top").innerText);
+    let totalScore;
 
     if (levelID.innerText === "1") {
-        counterScoreDiv += 100;
+        score += 500;
     } else if (levelID.innerText === "2") {
-        counterScoreDiv += 200;
+        score += 1000;
     } else if (levelID.innerText === "3") {
-        counterScoreDiv += 300;
+        score += 5000;
     }
-    counterScoreDiv = counterScoreDiv.toString().padStart(6, "0");
-    scoreDiv.innerText = counterScoreDiv;
+
+    scoreCounterTop.innerText = score.toString().padStart(6, "0");
+    scoreCounterBottom.innerText = score;
+
+    totalScore = score;
+    return totalScore;
 }
 
 

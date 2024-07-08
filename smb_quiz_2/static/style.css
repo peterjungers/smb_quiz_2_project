@@ -21,11 +21,16 @@ html, body, div, footer, h1, p, span, a, img, button {
 :root {
     --dark: #292929;
     --light: #f1f1f1;
+    --black: #000000;
     --focus-outline: #e00000;
 }
 
 * {
     box-sizing: border-box;
+}
+
+html {
+    /*background-color: black;*/
 }
 
 body {
@@ -38,10 +43,7 @@ body {
 }
 
 h1 {
-    font-family: "Press Start 2P", sans-serif;
-    font-size: 1.2rem;
     text-align: center;
-    line-height: 2rem;
 }
 
 p {
@@ -75,7 +77,22 @@ button:focus {
 #container {
     display: grid;
     row-gap: 2rem;
-    margin: 1.5rem;
+    max-width: 500px;
+    margin: 0 1.5rem 3rem;
+}
+
+.pixel-font {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+.lg-text {
+    font-size: 2rem;
+}
+
+.p-32 {
+    min-height: 32px;
 }
 
 .btn-rectangle {
@@ -113,6 +130,11 @@ button:focus {
     text-align: center;
 }
 
+/*was using on end of quiz btns*/
+/*.margin-0 {*/
+/*    margin: 0;*/
+/*}*/
+
 
 /* || QUESTION STYLES */
 .question p {
@@ -146,11 +168,40 @@ button:focus {
 
 
 /* || SCORE STYLES */
-#score-container {
+#score-container-outer {
     display: flex;
-    flex-direction: column;
-    height: 150px;
+    justify-content: center;
+    background-color: var(--black);
+    position: sticky;
+    top: 0;
+    padding: 1rem 0;
+    margin-bottom: 4rem;
+    z-index: 1;
 }
+
+#score-container-inner {
+    display: flex;
+    gap: 6rem;
+}
+
+#score-container-inner p {
+    flex: auto;
+}
+
+#score-container-inner p:first-child {
+    text-align: left;
+}
+
+#score-container-inner p:last-child {
+    text-align: right;
+}
+
+/*old one*/
+/*#score-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    height: 150px;*/
+/*}*/
 
 #score-sprite {
     display: block;
@@ -166,12 +217,17 @@ button:focus {
     margin-left: calc(50% - 100px);
 }
 
-#score-results {
-    display: none;
-    flex-direction: column;
-    row-gap: 1rem;
-    align-items: center;
-}
+/*old*/
+/*#score-results {*/
+/*    display: none;*/
+/*    flex-direction: column;*/
+/*    row-gap: 1rem;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.score-results {*/
+/*    text-align: center;*/
+/*}*/
 
 #score-circle {
     display: flex;
@@ -188,6 +244,11 @@ button:focus {
     font-family: "Press Start 2P", sans-serif;
     font-size: 1rem;
     color: var(--dark);
+}
+
+#next-level-btn {
+    /*opacity: .5;*/
+    /*pointer-events: none;*/
 }
 
 
@@ -224,8 +285,11 @@ footer a {
 /* Min-width 500px viewport */
 @media screen and (min-width: 500px) {
     #container {
-        max-width: 500px;
-        margin: 15% auto;
+        margin: 0 auto 3rem;
+    }
+
+    #score-container-inner {
+        min-width: 500px;
     }
 
     .btn-rectangle {
@@ -237,6 +301,6 @@ footer a {
 /* Min-width 1024px viewport */
 @media screen and (min-width: 1024px) {
     #container {
-        margin: 150px auto;
+        /*margin: 0 auto 3rem;*/
     }
 }

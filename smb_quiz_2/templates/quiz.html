@@ -2,7 +2,6 @@
 
 
 {% block content %}
-    <p id="score">000000</p>
     <img id="header-sprite" class="sprite" src="" alt="Pixel art">
 
     {% for q in quiz %}
@@ -32,17 +31,18 @@
         </div>
     {% endfor %}
 
-    <div id="score-container">
-        <img id= "score-sprite" src="{{ url_for('static', filename='images/bowser.png')}}" alt="Pixel art">
-        <p id="calculating-score">Calculating your score<span id="dots"></span></p>
-        <div id="score-results">
-            <div id="score-circle"><p></p></div>
-            <p id="score-message"></p>
-        </div>
-    </div>
+{#    <div id="score-container">#}
+{#        <img id= "score-sprite" src="{{ url_for('static', filename='images/bowser.png')}}" alt="Pixel art">#}
+{#        <p id="calculating-score">Calculating your score<span id="dots"></span></p>#}
+{#        <div id="score-results">#}
+{#            <div id="score-circle"><p></p></div>#}
+{#            <p id="score-message"></p>#}
+{#        </div>#}
+{#    </div>#}
 
-    <a id="next-level" class="btn-rectangle" href="#">Next Level</a>
-    <a class="btn-rectangle" href="{{ url_for('main.quiz') }}">Reset quiz</a>
+    <p class="pixel-font text-center"><span id="score-counter-bottom">0</span>/3500</p>
+    <p id = "message" class="pixel-font lg-text text-center p-32"></p>
+    <a id="quiz-finished-btn" class="btn-rectangle margin-0" href="{{ url_for('main.quiz') }}">Reset Quiz</a>
 {% endblock content %}
 
 

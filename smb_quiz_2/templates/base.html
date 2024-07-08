@@ -22,12 +22,19 @@ Date: March 2024
     <title>8-Bit Super Mario Bros. Quiz</title>
 </head>
 <body>
+    <div id="score-container-outer">
+        <div id="score-container-inner">
+            <p class="pixel-font">Score</p>
+            <p id="score-counter-top" class="score pixel-font">000000</p>
+        </div>
+    </div>
     <div id="container">
-        <h1><a href="{{ url_for('main.index') }}">8-Bit Super Mario Bros. Quiz</a></h1>
+        <h1 class="pixel-font"><a href="{{ url_for('main.index') }}">8-Bit Super Mario Bros. Quiz</a></h1>
         {% block content %}{% endblock content %}
         <footer>
-            <p>Written and designed by <a href="#" target="_blank">Peter Jungers</a>, 2024</p>
-            <p>Original pixel art made using in-game sprites as reference</p>
+            <p><a href="{{ url_for('main.index') }}">8-Bit Super Mario Bros. Quiz</a></p>
+            <p>Written and designed by <a href="https://peterjungers.github.io" target="_blank">Peter Jungers</a>, 2024</p>
+            <p>Pixel art made with <a href="https://www.piskelapp.com" target="_blank">Piskel</a></p>
         </footer>
     </div>
 
