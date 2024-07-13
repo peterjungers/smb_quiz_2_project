@@ -25,6 +25,7 @@ def quiz():
 
     Make comments.
     """
+
     def get_questions():
         levels = [1, 2, 3]
         quiz_questions = []

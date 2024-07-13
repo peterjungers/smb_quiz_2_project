@@ -1,10 +1,12 @@
 /*
-JavaScript for Super Mario Bros. quiz
+JavaScript for 8-Bit Super Mario Bros. Quiz
 Author: Peter Jungers
-Date: January/February 2023
+Date: January/February 2023 (v.1); Spring/Summer 2024 (v.2)
 */
 
 
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Two functions pertaining to images throughout site:
 
 
@@ -47,14 +49,13 @@ function randomizeImages() {
 }
 
 
-// For quiz page images only:
+/*
+(The following function is for quiz page images only.)
+Because img divs are included programmatically for each quiz question,
+and page design-wise not all questions should be followed by an image,
+the following is necessary:
+*/
 function showOrHideImages(images) {
-    /*
-    Because img divs are included programmatically for each quiz question,
-    and page design-wise not all questions should be followed by an image,
-    the following is necessary (note: div id "score-sprite" is not part of
-    images array):
-    */
     images.forEach(image => {
         if (image.id === "header-sprite"
             || image.id === "image-2"
@@ -69,17 +70,13 @@ function showOrHideImages(images) {
 
 
 
-// functions for showing correct level
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Three functions for showing correct level and quiz button:
 
-// function levelOne() {
-//     let levelID = "1";
-//     determineLevel(levelID);
-// }
 
 function determineLevel(levelID) {
     const levelIDs = document.querySelectorAll(".level-id");
     const question = document.querySelectorAll(".question");
-    const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
 
     // Shows or hides questions with levelID:
     for (let i = 0; i < levelIDs.length; i++) {
@@ -92,60 +89,55 @@ function determineLevel(levelID) {
     }
     // Sets next levelID:
     if (levelID === "1") {
-        setNextLevel("2");
+        setNextLevelBtn("2");
     }
     else if (levelID === "2") {
-        setNextLevel("3");
-    }
-    else {
-        setNextLevel("done");
-    }
+        setNextLevelBtn("3");
+    }  // Only three levels
 }
 
 
-function setNextLevel(level) {
-    const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
-
-    // quizFinishedBtn.innerText = "Reset Quiz";
-    // quizFinishedBtn.href = "quiz";
-
+function setNextLevelBtn(level) {
     /*
-    If quizFinishedBtn clicked before
+    This function can only be invoked when user has met criteria to advance to
+    next level (the "level" value will then be used to show and hide
+    appropriate buttons).
     */
-    quizFinishedBtn.addEventListener("click", () => {
+
+    const resetQuizBtn = document.querySelector("#reset-quiz-btn");
+    const nextLevelBtn = document.querySelector("#next-level-btn");
+
+    nextLevelBtn.addEventListener("click", () => {
+        resetQuizBtn.style.display = "block";
+        nextLevelBtn.style.display = "none";
         determineLevel(level);
     });
 }
 
 
 function determineQuizOutcome(levelScore) {
-    const quizFinishedBtn = document.querySelector("#quiz-finished-btn");
-    const quizTest = document.querySelector("#quiz-test")
+    const resetQuizBtn = document.querySelector("#reset-quiz-btn");
+    const nextLevelBtn = document.querySelector("#next-level-btn");
     let level = levelScore[0];
     let score = levelScore[1];
-    console.log(level)
-    console.log(score)
 
     if (level === "1" && score >= 1000) {
-        quizFinishedBtn.innerText = "Next Level";
-        quizFinishedBtn.href = "#";
-        quizFinishedBtn.addEventListener("click", () => {
-            quizFinishedBtn.style.display = "none";
-            quizTest.style.display = "block";
-        });
+        resetQuizBtn.style.display = "none";
+        nextLevelBtn.style.display = "block";
     }
     else if (level === "2" && score >= 3000) {
-        quizFinishedBtn.innerText = "Next Level";
-        quizFinishedBtn.href = "#";
+        resetQuizBtn.style.display = "none";
+        nextLevelBtn.style.display = "block";
     }
-    else if (level === "3" && score >= 23000) {
-        quizFinishedBtn.innerText = "High Scores";
-        quizFinishedBtn.href = "index";
+    else if (level === "3" && score >= 13000) {
+        resetQuizBtn.innerText = "High Scores";
+        resetQuizBtn.href = "high_scores";
     }
 }
 
 
-// The remaining ****four functions are for handling of quiz questions and score:
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// The remaining three functions are for handling of quiz questions and score:
 
 
 function decodeAnswers() {
@@ -205,9 +197,8 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Sorry, incorrect.";
                         counterAllQuestions += 1;
                     }
-                    console.log(counterAllQuestions);
-                    /* Disable question options for click
-                    or focus Enter keydown: */
+                    // Disable question options for click or
+                    // focus Enter keydown:
                     for (let i = 0; i < allOptions.length; i++) {
                         // Each option button:
                         if (allOptions[i].children[0]) {
@@ -226,7 +217,8 @@ function checkBtnAnswer(correctAnswers) {
                 // "display" property is set on "question" class div
                 if (levelIDs[i].parentElement.style.display === "block") {
                     visibleQuestions += 1;
-                    level = levelIDs[i].innerText;  // Same for all visible levelIDs
+                    level = levelIDs[i].innerText; // Same for all
+                    // visible levelIDs
                 }
             }
             let levelScore = [level, totalScore];
@@ -235,25 +227,6 @@ function checkBtnAnswer(correctAnswers) {
                 // Reset counter for next levelID:
                 counterAllQuestions = 0;
             }
-
-            // for (let i = 0; i < levelIDs.length; i++) {
-            //     console.log(levelIDs[i].innerText);
-            //     // if (levelIDs[i].innerText === "1") {
-            //     //     if (counterCorrectAnswers >= 2) {
-            //     //
-            //     //     }
-            //     // }
-            // }
-
-
-            // here the counterAllQuestions variable needs to be the amount needed to
-            // advance at each level
-            // if (counterAllQuestions === correctAnswers.length) {
-            //     determineQuizOutcome(totalScore);
-                // const score = document.querySelector("#score-container");
-                // score.scrollIntoView({behavior: "smooth", block: "start"});
-                // showCalculating(counterCorrectAnswers, counterAllQuestions);
-            // }
         });
     });
 }
@@ -281,48 +254,8 @@ function increaseScore(levelID) {
 }
 
 
-function showCalculating(counterCorrectAnswers, counterAllQuestions) {
-    const scoreSprite = document.querySelector("#score-sprite");
-    const calculatingScore = document.querySelector("#calculating-score");
-    const dotsSpan = document.querySelector("#dots");
-
-    scoreSprite.style.display = "none";
-
-    setTimeout(() => {
-        calculatingScore.style.display = "block";
-        const addDots = setInterval(() => {
-            dotsSpan.innerText += " .";
-            if (dotsSpan.innerText.length === 8) {  // 4 spaces, 4 dots
-                clearInterval(addDots);
-                showFinalScore(counterCorrectAnswers, counterAllQuestions);
-            }
-        }, 1000);
-    }, 1000);
-}
-
-
-function showFinalScore(counterCorrectAnswers, counterAllQuestions) {
-    // calculatingScore contains calculating score message:
-    const calculatingScore = document.querySelector("#calculating-score");
-    // scoreResults contains score-circle and score-message elements:
-    const scoreResults = document.querySelector("#score-results");
-    const scoreCircleText = document.querySelector("#score-circle p");
-    const scoreMessage = document.querySelector("#score-message");
-
-    calculatingScore.style.display = "none";
-    scoreResults.style.display = "flex";
-    scoreCircleText.innerText = `${counterCorrectAnswers}/${counterAllQuestions}`;
-
-    if (counterCorrectAnswers / counterAllQuestions === 1) {
-        scoreMessage.innerText = "Excellent!";
-    } else if (counterCorrectAnswers / counterAllQuestions >= .8) {
-        scoreMessage.innerText = "Great job!";
-    } else if (counterCorrectAnswers / counterAllQuestions >= .6) {
-        scoreMessage.innerText = "Pretty good!";
-    } else {
-        scoreMessage.innerText = "You'll do better next time!";
-    }
-}
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// On page loads:
 
 
 // Images sitewide:
