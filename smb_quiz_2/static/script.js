@@ -77,6 +77,7 @@ function showOrHideImages(images) {
 function determineLevel(levelID) {
     const levelIDs = document.querySelectorAll(".level-id");
     const question = document.querySelectorAll(".question");
+    const scoreNeeded = document.querySelector("#score-counter-bottom-needed")
 
     // Shows or hides questions with levelID:
     for (let i = 0; i < levelIDs.length; i++) {
@@ -90,10 +91,15 @@ function determineLevel(levelID) {
     // Sets next levelID:
     if (levelID === "1") {
         setNextLevelBtn("2");
+        scoreNeeded.innerText = "3500";
     }
     else if (levelID === "2") {
         setNextLevelBtn("3");
-    }  // Only three levels
+        scoreNeeded.innerText = "20000";
+    }
+    else if (levelID === "3") {
+        scoreNeeded.innerText = "60000";
+    }
 }
 
 
@@ -136,8 +142,8 @@ function determineQuizOutcome(levelScore) {
     }
     else if (level === "3" && score >= 60000) {
         message.innerText = "You beat the game!";
-        resetQuizBtn.innerText = "High Scores";
-        resetQuizBtn.href = "high_scores";
+        resetQuizBtn.innerText = "Home";
+        resetQuizBtn.href = "index";
     }
     // Level not passed:
     else {

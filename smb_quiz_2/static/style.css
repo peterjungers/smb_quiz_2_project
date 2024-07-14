@@ -119,11 +119,11 @@ button:focus {
     display: none;
 }
 
-.sm-text {
+.text-sm {
     font-size: 1rem;
 }
 
-.lg-text {
+.text-lg {
     font-size: 2rem;
 }
 
