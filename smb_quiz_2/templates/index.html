@@ -4,7 +4,27 @@
 {% block content %}
     <img class="sprite" src="" alt="Pixel art">
     <p>
-        Welcome to the Super Mario Bros. quiz! The quiz consists of ten randomly chosen questions about Super Mario Bros., Super Mario Bros. 2, and Super Mario Bros. 3—all from the Nintendo Entertainment System. You will have one opportunity to answer each question. If you get the answer wrong, don't worry! The answer will remain hidden, though, so you can try to get it right another time. Your final score will be tallied after all questions have been answered. Ready?
+        Welcome to the 8-Bit Super Mario Bros. Quiz! The quiz consists of thirty randomized questions about all three Super Mario Bros. games from the Nintendo Entertainment System. There are three levels of increasing difficulty, consisting of ten questions each. Below are the cumulative points you'll need after each level in order to advance to the next. Beating Level 3 means you beat the game!
+    </p>
+    <table class="pixel-font sm-text">
+        <tr>
+            <td>Level 1</td>
+            <td class="text-center">.................</td>
+            <td class="text-right">3500</td>
+        </tr>
+        <tr>
+            <td>Level 2</td>
+            <td class="text-center">.................</td>
+            <td class="text-right">20000</td>
+        </tr>
+        <tr>
+            <td>Level 3</td>
+            <td class="text-center">.................</td>
+            <td class="text-right">60000</td>
+        </tr>
+    </table>
+    <p>
+        Because questions are randomized, you'll see different ones if you take the quiz again. Future versions of the quiz will include a leaderboard of the top ten scores. Ready?
     </p>
     <a class="btn-rectangle" href="{{ url_for('main.quiz') }}">Press start</a>
     <img class="sprite" src="" alt="Pixel art">

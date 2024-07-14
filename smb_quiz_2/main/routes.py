@@ -126,3 +126,8 @@ def quiz():
     return render_template("quiz.html",
                            quiz=quiz,
                            array=coded_answers)
+
+
+@main.route("/high_scores")
+def high_scores():
+    return render_template("high_scores.html")

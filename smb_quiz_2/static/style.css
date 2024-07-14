@@ -9,7 +9,7 @@ Date: January/February 2023
 
 
 /* || CSS RESET */
-html, body, div, footer, h1, p, span, a, img, button {
+html, body, div, footer, table, tr, td, h1, p, span, a, img, button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -42,9 +42,9 @@ body {
     -ms-text-size-adjust: 100%;
 }
 
-h1 {
-    text-align: center;
-}
+/*h1 {*/
+/*    text-align: center;*/
+/*}*/
 
 p {
     font-family: "Montserrat", sans-serif;
@@ -57,6 +57,13 @@ a {
     color: var(--light);
 }
 
+.black-background {
+    background-color: var(--black);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+/* Round quiz buttons */
 button {
     background-color: var(--dark);
     color: var(--light);
@@ -66,43 +73,6 @@ a:focus,
 button:focus {
     outline-color: var(--focus-outline);
     tab-index: 0;
-}
-
-.level-id {
-    display: none;
-}
-
-
-/* || UTILITIES */
-#container {
-    display: grid;
-    row-gap: 2rem;
-    max-width: 500px;
-    margin: 0 1.5rem 3rem;
-}
-
-.pixel-font {
-    font-family: "Press Start 2P", sans-serif;
-    font-size: 1.2rem;
-    line-height: 2rem;
-}
-
-.lg-text {
-    font-size: 2rem;
-}
-
-.p-32 {
-    min-height: 32px;
-}
-
-.btn-rectangle {
-    font-family: "Press Start 2P", sans-serif;
-    font-size: 1rem;
-    text-align: center;
-    padding: 1.1rem 1.5rem;
-    margin: 1rem 0;
-    border: 1px solid var(--light);
-    border-radius: 20px;
 }
 
 .btn-circle {
@@ -120,14 +90,53 @@ button:focus {
     color: var(--dark);
 }
 
-.sprite,
-#error-sprite {
-    justify-self: center;
-    width: 75px;
+.btn-rectangle {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1.1rem 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid var(--light);
+    border-radius: 20px;
+}
+
+
+/* || UTILITIES */
+#container {
+    display: grid;
+    row-gap: 2rem;
+    max-width: 500px;
+    margin: 0 1.5rem 3rem;
+}
+
+.pixel-font {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+.level-id {
+    display: none;
+}
+
+.sm-text {
+    font-size: 1rem;
+}
+
+.lg-text {
+    font-size: 2rem;
+}
+
+.p-32 {
+    min-height: 32px;
 }
 
 .text-center {
     text-align: center;
+}
+
+.text-right {
+    text-align: right;
 }
 
 /*was using on end of quiz btns*/
@@ -137,6 +146,12 @@ button:focus {
 
 .hidden {
     display: none;
+}
+
+.sprite,
+#error-sprite {
+    justify-self: center;
+    width: 75px;
 }
 
 
@@ -167,7 +182,8 @@ button:focus {
 }
 
 .option p {
-    height: fit-content;
+    /*height: fit-content;*/
+    margin: 0;
 }
 
 

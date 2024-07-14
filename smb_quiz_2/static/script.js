@@ -106,32 +106,42 @@ function setNextLevelBtn(level) {
 
     const resetQuizBtn = document.querySelector("#reset-quiz-btn");
     const nextLevelBtn = document.querySelector("#next-level-btn");
+    const message = document.querySelector("#message");
 
     nextLevelBtn.addEventListener("click", () => {
         resetQuizBtn.style.display = "block";
         nextLevelBtn.style.display = "none";
+        message.innerText = "";
         determineLevel(level);
     });
 }
 
 
 function determineQuizOutcome(levelScore) {
+    const message = document.querySelector("#message");
     const resetQuizBtn = document.querySelector("#reset-quiz-btn");
     const nextLevelBtn = document.querySelector("#next-level-btn");
     let level = levelScore[0];
     let score = levelScore[1];
 
-    if (level === "1" && score >= 1000) {
+    if (level === "1" && score >= 3500) {
+        message.innerText = "Congratulations!";
         resetQuizBtn.style.display = "none";
         nextLevelBtn.style.display = "block";
     }
-    else if (level === "2" && score >= 3000) {
+    else if (level === "2" && score >= 20000) {
+        message.innerText = "Congratulations!";
         resetQuizBtn.style.display = "none";
         nextLevelBtn.style.display = "block";
     }
-    else if (level === "3" && score >= 13000) {
+    else if (level === "3" && score >= 60000) {
+        message.innerText = "You beat the game!";
         resetQuizBtn.innerText = "High Scores";
         resetQuizBtn.href = "high_scores";
+    }
+    // Level not passed:
+    else {
+        message.innerText = "Sorry, try again.";
     }
 }
 
