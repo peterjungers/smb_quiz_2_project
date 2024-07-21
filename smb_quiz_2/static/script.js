@@ -143,7 +143,7 @@ function determineQuizOutcome(levelScore) {
     else if (level === "3" && score >= 60000) {
         message.innerText = "You beat the game!";
         resetQuizBtn.innerText = "Home";
-        resetQuizBtn.href = "index";
+        resetQuizBtn.href = "/";
     }
     // Level not passed:
     else {
@@ -257,7 +257,7 @@ function increaseScore(levelID) {
     if (levelID.innerText === "1") {
         score += 500;
     } else if (levelID.innerText === "2") {
-        score += 1000;
+        score += 2500;
     } else if (levelID.innerText === "3") {
         score += 5000;
     }

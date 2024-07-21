@@ -36,7 +36,7 @@ def quiz():
                         .filter(Question.level == level)
                         ).all()
             random.shuffle(questions)
-            questions = questions[0:4]
+            questions = questions[0:10]
             quiz_questions.append(questions)
 
         return quiz_questions
