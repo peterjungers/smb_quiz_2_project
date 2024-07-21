@@ -3,14 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from smb_quiz_2.config import Config
 
-# initialized outside of app so that they aren't bound to specific app
-# (using Blueprints allows me to create multiples instances of app,
-# but I can have same db, users, etc., across all instances)
-db = SQLAlchemy()
-# bcrypt
-# login_manager
-# mail
 
+db = SQLAlchemy()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
