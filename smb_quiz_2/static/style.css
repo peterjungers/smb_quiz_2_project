@@ -182,7 +182,7 @@ button:focus {
 }
 
 .option p {
-    /*height: fit-content;*/
+    height: fit-content;
     margin: 0;
 }
 
