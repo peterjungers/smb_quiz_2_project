@@ -14,9 +14,7 @@ def create_app(config_class=Config):
 
     from smb_quiz_2.errors.handlers import errors
     from smb_quiz_2.main.routes import main
-    from smb_quiz_2.users.routes import users
     app.register_blueprint(errors)
     app.register_blueprint(main)
-    app.register_blueprint(users)
 
     return app
