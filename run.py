@@ -1,8 +1,8 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # Program name:     8-Bit Super Mario Bros. Quiz
-# Version:          1.0
+# Version:          2.0
 # Author:           Peter Jungers
-# Date:             March 2024
+# Date:             January/February 2023 (v.1); Spring/Summer 2024 (v.2)
 # Description:      Web app quiz about 8-Bit Super Mario Bros. games
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
