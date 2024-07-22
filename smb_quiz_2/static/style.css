@@ -1,7 +1,7 @@
 /*
-CSS for Super Mario Bros. quiz
+CSS for 8-Bit Super Mario Bros. Quiz
 Author: Peter Jungers
-Date: January/February 2023
+Date: January/February 2023 (v.1); Spring/Summer 2024 (v.2)
 */
 
 
@@ -9,7 +9,7 @@ Date: January/February 2023
 
 
 /* || CSS RESET */
-html, body, div, footer, table, tr, td, h1, p, span, a, img, button {
+html, body, div, section, footer, table, tr, td, h1, p, span, a, img, button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -30,21 +30,18 @@ html, body, div, footer, table, tr, td, h1, p, span, a, img, button {
 }
 
 html {
-    /*background-color: black;*/
+    background-color: var(--black);
 }
 
 body {
     background-color: var(--dark);
     color: var(--light);
+    padding-bottom: 1.5rem;
     /* So font-size doesn't increase when mobile switches to landscape: */
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: none;
     -ms-text-size-adjust: 100%;
 }
-
-/*h1 {*/
-/*    text-align: center;*/
-/*}*/
 
 p {
     font-family: "Montserrat", sans-serif;
@@ -139,11 +136,6 @@ button:focus {
     text-align: right;
 }
 
-/*was using on end of quiz btns*/
-/*.margin-0 {*/
-/*    margin: 0;*/
-/*}*/
-
 .hidden {
     display: none;
 }
@@ -214,61 +206,6 @@ button:focus {
 
 #score-container-inner p:last-child {
     text-align: right;
-}
-
-/*old one*/
-/*#score-container {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    height: 150px;*/
-/*}*/
-
-#score-sprite {
-    display: block;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-}
-
-#calculating-score {
-    display: none;
-    width: 210px;
-    margin-top: 9.5%;
-    margin-left: calc(50% - 100px);
-}
-
-/*old*/
-/*#score-results {*/
-/*    display: none;*/
-/*    flex-direction: column;*/
-/*    row-gap: 1rem;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.score-results {*/
-/*    text-align: center;*/
-/*}*/
-
-#score-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--light);
-    width: 6rem;
-    height: 6rem;
-    border: 1px solid var(--light);
-    border-radius: 50%;
-}
-
-#score-circle p {
-    font-family: "Press Start 2P", sans-serif;
-    font-size: 1rem;
-    color: var(--dark);
-}
-
-#next-level-btn {
-    /*opacity: .5;*/
-    /*pointer-events: none;*/
 }
 
 

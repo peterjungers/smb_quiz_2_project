@@ -31,15 +31,6 @@
         </div>
     {% endfor %}
 
-{#    <div id="score-container">#}
-{#        <img id= "score-sprite" src="{{ url_for('static', filename='images/bowser.png')}}" alt="Pixel art">#}
-{#        <p id="calculating-score">Calculating your score<span id="dots"></span></p>#}
-{#        <div id="score-results">#}
-{#            <div id="score-circle"><p></p></div>#}
-{#            <p id="score-message"></p>#}
-{#        </div>#}
-{#    </div>#}
-
     <p class="pixel-font text-lg text-center"><span id="score-counter-bottom">0</span>/<span id="score-counter-bottom-needed"></span></p>
     <p id="message" class="pixel-font text-center p-32"></p>
     <a id="reset-quiz-btn" class="btn-rectangle margin-0" href="{{ url_for('main.quiz') }}">Reset Quiz</a>
@@ -50,7 +41,5 @@
 {% block js %}
     <script id="array">
         const array = {{ array|tojson }}
-        {#const score = {{ score|tojson }}#}
     </script>
 {% endblock js %}
-

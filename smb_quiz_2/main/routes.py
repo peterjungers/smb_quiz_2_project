@@ -18,12 +18,8 @@ def index():
 
 @main.route("/quiz")
 def quiz():
-    """ To do:
-    Read more about calling functions, variable placement above, etc.
-    Shadowing variable names within functions as shown by intellisense.
-    Functions within functions—seems hard to read.
-
-    Make comments.
+    """ Contains all functionality for getting Question objects from database
+    and encrypting correct answers.
     """
 
     def get_questions():
@@ -70,7 +66,6 @@ def quiz():
         return correct_answers, quiz
 
     def encrypt_answers(correct_answers):
-        """ """
         def get_key(coded_answer):
             key = str(len(coded_answer))
             # This is so I know all keys are two digits:
@@ -126,8 +121,3 @@ def quiz():
     return render_template("quiz.html",
                            quiz=quiz,
                            array=coded_answers)
-
-
-@main.route("/high_scores")
-def high_scores():
-    return render_template("high_scores.html")

@@ -271,7 +271,7 @@ function increaseScore(levelID) {
 
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-// On page loads:
+// On page load:
 
 
 // Images sitewide:
